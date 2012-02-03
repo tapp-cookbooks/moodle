@@ -1,0 +1,3 @@
+# crontab fragment for moodle
+
+*/15 * * * *	www-data	/usr/bin/php <%=node[:moodle][:dir]%>/admin/cli/cron.php

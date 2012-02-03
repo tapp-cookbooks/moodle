@@ -1,0 +1,13 @@
+server {
+	listen 80 default;
+	server_name <%= node.fqdn %>;
+	access_log	/var/log/nginx/moodle-access.log;
+	root <%= node[:moodle][:dir] %>;
+	index index.html index.php;
+	location ~ .php$ {
+		fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  <%= node[:moodle][:dir] %>$fastcgi_script_name;
+        include        /etc/nginx/fastcgi_params;
+    }
+}
